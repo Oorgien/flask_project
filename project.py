@@ -1,7 +1,5 @@
-from flask import Flask
-
 from datetime import datetime
-from flask import request, render_template
+from flask import Flask, request, render_template
 import redis
 
 app = Flask(__name__)
@@ -31,13 +29,13 @@ def add_message():
                  date_time=datetime.strftime(datetime.now(), "%d.%m.%Y %H:%M:%S"),
                  text=text,
                  tag=tag))
-    # добавляем id в список
+
     db.lpush('history:', str(post_id))
     return render_template('index.html', history=get_posts())
 
 
 def get_posts():
-    posts = db.lrange('history:', 0, -1)  # сортировка постов в обратном порядке
+    posts = db.lrange('history:', 0, -1)  
     history = []
     for post_id in posts:
     
