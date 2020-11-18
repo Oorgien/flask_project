@@ -1,5 +1,5 @@
 FROM python:3.8.5
-WORKDIR /home/oorgien/code/Project2
+WORKDIR .
 ENV FLASK_APP project.py
 ENV FLASK_RUN_HOST 0.0.0.0
 COPY requirements.txt requirements.txt

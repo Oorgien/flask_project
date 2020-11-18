@@ -4,8 +4,8 @@ services:
     build: .
     ports:
       - "5000:5000"
-    volumes:
-      - .:/home/oorgien/code/Project2
+    #volumes:
+    # - .:/home/oorgien/code/Project2
     environment:
       FLASK_ENV: debug
   redis:

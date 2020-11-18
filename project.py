@@ -7,7 +7,6 @@ import redis
 app = Flask(__name__)
 app.config.from_object('config')
 
-# создаем базу данных
 db = redis.StrictRedis(
     host=app.config['DB_HOST'],
     port=app.config['DB_PORT'],
@@ -21,12 +20,12 @@ def main():
 @app.route('/', methods=['POST'])
 def add_message():
     text = request.form['text']
-    tag = request.form['tag']  # получаем текст из формы
+    tag = request.form['tag'] 
     if len(text) < 1:
         return render_template('index.html',
-                               history=get_posts())  # подставляем значение history в index.html (в шаблон)
+                               history=get_posts()) 
     post_id = str(db.incr("id"))
-    # добавляем информацию о посте в базу данных
+    
     db.hmset('post:' + post_id,
              dict(
                  date_time=datetime.strftime(datetime.now(), "%d.%m.%Y %H:%M:%S"),
@@ -41,7 +40,8 @@ def get_posts():
     posts = db.lrange('history:', 0, -1)  # сортировка постов в обратном порядке
     history = []
     for post_id in posts:
-        post = db.hgetall('post:' + str(post_id, 'utf-8'))  # получение информации по id
+    
+        post = db.hgetall('post:' + str(post_id, 'utf-8')) 
         history.append(
             dict(
                 date_time=post[b'date_time'].decode(),
