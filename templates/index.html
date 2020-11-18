@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+</head>
+<body>
+<h3>Add post and tag</h3>
+<form action="/" method="post" >
+    <input type="text" name="text">
+    <input type="text" name="tag">
+    <button type="submit">Post</button>
+</form>
+<h3>Posts</h3>
+{% for post in history %}
+<div>
+    {{ post.date_time }}:
+    <br>
+    {{ post.text }}&nbsp;
+    <b>#{{ post.tag }}</b>
+    </br>
+{% else %}
+No posts yet
+{% endfor %}
+</div>
+</body>
+</html>
